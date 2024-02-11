@@ -87,5 +87,13 @@ class GamePlayerSets
   end
 end
 
-gamerz = GamePlayerSets.new()
-gamerz.play_game
+puts "choose 1 for player sets, choose 2 for computer sets"
+player_choice = gets.chomp
+if player_choice == "1"
+  gamery = GamePlayerSets.new()
+  gamery.play_game
+
+elsif player_choice == "2"
+  gamerz = GameComputerSets.new()
+  gamerz.play_game
+end
