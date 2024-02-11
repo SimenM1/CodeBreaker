@@ -1,5 +1,5 @@
 #generate 4 color code from 6 options
-class Game
+class GameComputerSets
   def computer_generated_colors
     colors = ["yellow", "blue", "green", "violet", "red", "orange"]
     index = rand(5)
@@ -17,16 +17,18 @@ class Game
 
   def compare()
     feedback = ""
-    no_replica_user = @user_colors
-    for i in 0..3 #ech iteration removes when it matches. Red first
-      code_colors_compare = @code_colors
+    code_colors_compare = Marshal.load(Marshal.dump(@code_colors))
+    for i in 0..3
       if @user_colors[i] == code_colors_compare[i]
         code_colors_compare[i] = " "
         feedback += "red marker, "
       end
+    end
 
+    for i in 0..3
       if code_colors_compare.include?(@user_colors[i])
-        code_colors_compare[i] = " "
+        code_color_index = code_colors_compare.find_index(@user_colors[i])
+        code_colors_compare[code_color_index] = " "
         feedback += "white marker, "
       end
     end
@@ -43,5 +45,5 @@ class Game
   end
 end
 
-guessers = Game.new()
-guessers.play_game
+gamerz = GameComputerSets.new()
+gamerz.play_game
