@@ -18,16 +18,19 @@ class GameComputerSets
   def compare()
     feedback = ""
     code_colors_compare = Marshal.load(Marshal.dump(@code_colors))
+    user_colors_compare = Marshal.load(Marshal.dump(@user_colors))
     for i in 0..3
-      if @user_colors[i] == code_colors_compare[i]
+      if user_colors_compare[i] == code_colors_compare[i]
+        user_colors_compare[i] = "x"
         code_colors_compare[i] = " "
         feedback += "red marker, "
       end
     end
 
     for i in 0..3
-      if code_colors_compare.include?(@user_colors[i])
-        code_color_index = code_colors_compare.find_index(@user_colors[i])
+      if code_colors_compare.include?(user_colors_compare[i])
+        code_color_index = code_colors_compare.find_index(user_colors_compare[i])
+        user_colors_compare[i] = "x"
         code_colors_compare[code_color_index] = " "
         feedback += "white marker, "
       end
