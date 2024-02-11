@@ -48,5 +48,44 @@ class GameComputerSets
   end
 end
 
-gamerz = GameComputerSets.new()
+class GamePlayerSets
+  def computer_generated_colors
+    colors = ["yellow", "blue", "green", "violet", "red", "orange"]
+    index = rand(5)
+    return colors[index]
+  end
+
+  def initialize()
+    @computer_guess =
+    @user_set = [gets.chomp, gets.chomp, gets.chomp, gets.chomp]
+    @iterations = 0
+    @answer = ["", "", "", ""]
+  end
+
+  def computer_guess()
+    @computer_guess = [computer_generated_colors, computer_generated_colors, computer_generated_colors, computer_generated_colors]
+  end
+
+  def compare()
+    feedback = ""
+    @iterations += 1
+    for i in 0..3
+      if @user_set[i] == @computer_guess[i]
+        @answer[i] = @computer_guess[i]
+      end
+    end
+    puts "computer has tried #{@iterations} number of times"
+  end
+
+  def play_game()
+    until @answer == @user_set
+      puts "computer keeps trying!"
+      computer_guess()
+      compare()
+    end
+    puts "omg, the computers guessed it! the code is #{@answer}"
+  end
+end
+
+gamerz = GamePlayerSets.new()
 gamerz.play_game
